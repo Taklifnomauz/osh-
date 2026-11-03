@@ -1,155 +1,609 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#173b2e">
-<title>Oshga taklifnoma</title>
-<style>
-:root{--green:#173b2e;--deep:#0d281f;--gold:#d8b76b;--cream:#fff8e8;--red:#8d2d25}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--deep);color:var(--cream);font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 12px 12px,transparent 8px,#d8b76b 8.5px,transparent 9.5px);background-size:36px 36px}
-.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 14px}
-.cover{width:min(100%,560px);min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:34px 22px;border:1px solid var(--gold);outline:1px solid #d8b76b55;outline-offset:-9px;background:radial-gradient(ellipse at center,#28523e 0%,#173b2e 62%,#102c22 100%);box-shadow:0 18px 60px #0006}
-.cover:before,.cover:after{content:"❧ ✦ ❧";position:absolute;color:var(--gold);font-size:25px;letter-spacing:9px;left:0;right:0}
-.cover:before{top:25px}.cover:after{bottom:25px}
-.kicker{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#e4cb8c}
-h1{font-size:clamp(38px,9vw,62px);font-weight:normal;line-height:1.1;margin:18px 0 8px;text-shadow:0 3px 16px #0005}
-.cover-sub{font-size:16px;letter-spacing:1px;color:#f2e6c8;margin:0 0 12px}
-.plate-wrap{position:relative;width:min(82vw,340px);aspect-ratio:1;margin:8px auto 4px;display:grid;place-items:center;cursor:pointer;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 18px 18px #0005)}
-.plate{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 48%,#e4c47b 0 34%,#8e5e2f 35% 38%,#f3dfa6 39% 42%,#a8793d 43% 46%,#f2d58c 47% 50%,#69462b 51% 53%,#e5c77f 54% 60%,#a8793d 61% 64%,#f5dfa1 65% 70%,#7e542d 71% 73%,#d4ad62 74% 78%,#6b482a 79% 81%,#d8b76b 82% 100%);border:2px solid #f2d999;box-shadow:inset 0 0 0 7px #7b512c,inset 0 0 0 10px #f6dfa2}
-.rice{position:absolute;inset:19%;border-radius:50%;background:radial-gradient(ellipse at 30% 30%,#fff0c1,#d6a34e 65%,#a9652b);border:2px solid #f7e2a4;overflow:hidden}
-.rice:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 25% 25%,#7a3d20 0 5%,transparent 6%),radial-gradient(ellipse at 60% 20%,#6f351d 0 4%,transparent 5%),radial-gradient(ellipse at 72% 58%,#7c401f 0 5%,transparent 6%),radial-gradient(ellipse at 35% 70%,#8c4a22 0 4%,transparent 5%),radial-gradient(ellipse at 52% 45%,#f7e8b6 0 5%,transparent 6%),radial-gradient(ellipse at 22% 58%,#f8e6b3 0 5%,transparent 6%),radial-gradient(ellipse at 45% 18%,#f9e9bd 0 4%,transparent 5%),radial-gradient(ellipse at 80% 30%,#f5df9e 0 4%,transparent 5%);background-size:100% 100%}
-.carrot{position:absolute;width:18%;height:5%;border-radius:10px;background:#e87827;transform:rotate(-27deg);top:39%;left:27%;box-shadow:30px 22px #df7427,-4px 38px #e87827,55px -8px #e87827}
-.sticker{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-7deg);width:68%;padding:13px 8px;background:#fff8e8;color:#173b2e;border:2px dashed #a77b37;border-radius:12px;box-shadow:0 5px 14px #0004;font-family:Arial,sans-serif;font-weight:bold;font-size:clamp(12px,3.3vw,17px);animation:pulse 1.5s ease-in-out infinite}
-.sticker small{display:block;font-size:10px;letter-spacing:1px;margin-top:5px;color:#8d2d25}
-.tap-hint{font-size:14px;color:#f2dfad;letter-spacing:1px;margin:8px 0 0}
-.invitation{display:none;width:min(100%,560px);position:relative;padding:36px 24px;text-align:center;background:var(--cream);color:var(--green);border:4px double #b88e43;outline:1px solid #b88e43;outline-offset:-12px;box-shadow:0 20px 70px #0006;animation:reveal .9s cubic-bezier(.2,.8,.2,1) both}
-.invitation.show{display:block}
-.invitation .orn{color:#a77b37;font-size:25px;letter-spacing:8px;margin:8px 0 16px}
-.invitation .eyebrow{font-size:11px;letter-spacing:3px;color:#98713a;text-transform:uppercase}
-.invitation h2{font-weight:normal;font-size:clamp(32px,8vw,48px);margin:16px 0;color:#214c37}
-.intro{font-size:17px;line-height:1.8;margin:14px 0}
-.family{font-size:22px;color:#98713a;margin:20px 0}
-.details{margin:24px 0;padding:18px 10px;border-top:1px solid #d9c69c;border-bottom:1px solid #d9c69c}
-.detail{margin:15px 0}.label{font:11px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#98713a;margin-bottom:5px}.value{font-size:19px;line-height:1.5}
-.countdown{display:flex;justify-content:center;gap:8px;margin:22px 0}.countdown div{min-width:58px;padding:10px 5px;background:#e8eddf;border-radius:7px}.countdown strong{display:block;font: bold 22px Arial,sans-serif}.countdown span{font:11px Arial,sans-serif}
-.actions{display:grid;gap:10px;margin:22px 0}.btn{display:block;width:100%;padding:14px 12px;border:0;border-radius:5px;background:var(--green);color:white;text-decoration:none;font:14px Arial,sans-serif;cursor:pointer}.btn.gold{background:#a47e3c}.footer{font-size:14px;line-height:1.7;color:#98713a;margin-top:20px}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@keyframes pulse{0%,100%{transform:translate(-50%,-50%) rotate(-7deg) scale(1)}50%{transform:translate(-50%,-50%) rotate(-7deg) scale(1.06)}}
-@keyframes reveal{from{opacity:0;transform:translateY(28px) scale(.92);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:translateY(0) scale(1);clip-path:inset(0 0 0 0)}}
-@media(max-width:380px){.cover{min-height:620px;padding:30px 18px}.invitation{padding:32px 18px}.countdown{gap:5px}.countdown div{min-width:51px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b2e">
+  <title>Oshga taklifnoma</title>
+
+  <style>
+    :root {
+      --green: #173b2e;
+      --deep: #0d281f;
+      --gold: #d8b76b;
+      --cream: #fff8e8;
+      --red: #8d2d25;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--deep);
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image: radial-gradient(
+        circle at 12px 12px,
+        transparent 8px,
+        var(--gold) 8.5px,
+        transparent 9.5px
+      );
+      background-size: 36px 36px;
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 14px;
+    }
+
+    .cover {
+      width: min(100%, 560px);
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 34px 22px;
+      text-align: center;
+      border: 1px solid var(--gold);
+      outline: 1px solid #d8b76b55;
+      outline-offset: -9px;
+      background: radial-gradient(
+        ellipse at center,
+        #28523e 0%,
+        #173b2e 62%,
+        #102c22 100%
+      );
+      box-shadow: 0 18px 60px #0006;
+      transition: opacity .5s ease, transform .7s ease;
+    }
+
+    .cover::before,
+    .cover::after {
+      content: "❧ ✦ ❧";
+      position: absolute;
+      left: 0;
+      right: 0;
+      color: var(--gold);
+      font-size: 25px;
+      letter-spacing: 9px;
+    }
+
+    .cover::before { top: 25px; }
+    .cover::after { bottom: 25px; }
+
+    .kicker {
+      color: #e4cb8c;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 8px;
+      font-size: clamp(38px, 9vw, 62px);
+      font-weight: normal;
+      line-height: 1.1;
+      text-shadow: 0 3px 16px #0005;
+    }
+
+    .cover-sub {
+      margin: 0 0 12px;
+      color: #f2e6c8;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    .plate-wrap {
+      position: relative;
+      width: min(82vw, 340px);
+      aspect-ratio: 1;
+      margin: 8px auto 4px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 18px 18px #0005);
+    }
+
+    .plate {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 50% 48%,
+        #e4c47b 0 34%,
+        #8e5e2f 35% 38%,
+        #f3dfa6 39% 42%,
+        #a8793d 43% 46%,
+        #f2d58c 47% 50%,
+        #69462b 51% 53%,
+        #e5c77f 54% 60%,
+        #a8793d 61% 64%,
+        #f5dfa1 65% 70%,
+        #7e542d 71% 73%,
+        #d4ad62 74% 78%,
+        #6b482a 79% 81%,
+        #d8b76b 82% 100%
+      );
+      border: 2px solid #f2d999;
+      box-shadow:
+        inset 0 0 0 7px #7b512c,
+        inset 0 0 0 10px #f6dfa2;
+    }
+
+    .rice {
+      position: absolute;
+      inset: 19%;
+      overflow: hidden;
+      border: 2px solid #f7e2a4;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at 30% 30%,
+        #fff0c1,
+        #d6a34e 65%,
+        #a9652b
+      );
+    }
+
+    .rice::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 25%, #7a3d20 0 5%, transparent 6%),
+        radial-gradient(ellipse at 60% 20%, #6f351d 0 4%, transparent 5%),
+        radial-gradient(ellipse at 72% 58%, #7c401f 0 5%, transparent 6%),
+        radial-gradient(ellipse at 35% 70%, #8c4a22 0 4%, transparent 5%),
+        radial-gradient(ellipse at 52% 45%, #f7e8b6 0 5%, transparent 6%),
+        radial-gradient(ellipse at 22% 58%, #f8e6b3 0 5%, transparent 6%),
+        radial-gradient(ellipse at 45% 18%, #f9e9bd 0 4%, transparent 5%),
+        radial-gradient(ellipse at 80% 30%, #f5df9e 0 4%, transparent 5%);
+    }
+
+    .carrot {
+      position: absolute;
+      width: 18%;
+      height: 5%;
+      top: 39%;
+      left: 27%;
+      border-radius: 10px;
+      background: #e87827;
+      transform: rotate(-27deg);
+      box-shadow: 30px 22px #df7427, -4px 38px #e87827, 55px -8px #e87827;
+    }
+
+    .sticker {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 68%;
+      padding: 13px 8px;
+      transform: translate(-50%, -50%) rotate(-7deg);
+      border: 2px dashed #a77b37;
+      border-radius: 12px;
+      background: var(--cream);
+      color: var(--green);
+      box-shadow: 0 5px 14px #0004;
+      font-family: Arial, sans-serif;
+      font-size: clamp(12px, 3.3vw, 17px);
+      font-weight: bold;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .sticker small {
+      display: block;
+      margin-top: 5px;
+      color: var(--red);
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .tap-hint {
+      margin: 8px 0 0;
+      color: #f2dfad;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .invitation {
+      display: none;
+      width: min(100%, 560px);
+      position: relative;
+      padding: 36px 24px;
+      text-align: center;
+      background: var(--cream);
+      color: var(--green);
+      border: 4px double #b88e43;
+      outline: 1px solid #b88e43;
+      outline-offset: -12px;
+      box-shadow: 0 20px 70px #0006;
+    }
+
+    .invitation.show {
+      display: block;
+      animation: reveal .9s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .orn {
+      margin: 8px 0 16px;
+      color: #a77b37;
+      font-size: 25px;
+      letter-spacing: 8px;
+    }
+
+    .eyebrow {
+      color: #98713a;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .invitation h2 {
+      margin: 16px 0;
+      color: #214c37;
+      font-size: clamp(32px, 8vw, 48px);
+      font-weight: normal;
+    }
+
+    .intro {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .family {
+      margin: 20px 0;
+      color: #98713a;
+      font-size: 22px;
+    }
+
+    .details {
+      margin: 24px 0;
+      padding: 18px 10px;
+      border-top: 1px solid #d9c69c;
+      border-bottom: 1px solid #d9c69c;
+    }
+
+    .detail { margin: 15px 0; }
+
+    .label {
+      margin-bottom: 5px;
+      color: #98713a;
+      font: 11px Arial, sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 22px 0;
+    }
+
+    .countdown div {
+      min-width: 58px;
+      padding: 10px 5px;
+      border-radius: 7px;
+      background: #e8eddf;
+    }
+
+    .countdown strong {
+      display: block;
+      font: bold 22px Arial, sans-serif;
+    }
+
+    .countdown span { font: 11px Arial, sans-serif; }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 12px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--green);
+      color: white;
+      text-decoration: none;
+      font: 14px Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .btn.gold { background: #a47e3c; }
+
+    .footer {
+      margin-top: 20px;
+      color: #98713a;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) rotate(-7deg) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(-7deg) scale(1.06);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(.92);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .cover { min-height: 620px; padding: 30px 18px; }
+      .invitation { padding: 32px 18px; }
+      .countdown { gap: 5px; }
+      .countdown div { min-width: 51px; }
+    }
+  </style>
 </head>
+
 <body>
-<main class="screen">
-  <section class="cover" id="cover" aria-label="Osh laganini bosib taklifnomani oching">
-    <p class="kicker">Bismillahir rohmanir rohiym</p>
-    <h1>Oshga<br>taklifnoma</h1>
-    <p class="cover-sub">Qadrli mehmonimiz, marhamat!</p>
-    <div class="plate-wrap" id="openInvite" role="button" tabindex="0" aria-label="Taklifnomani ochish">
-      <div class="plate"><div class="rice"><div class="carrot"></div></div></div>
-      <div class="sticker">TAKLIFNOMANI OCHISH<small>↑ LAGANNI BOSING ↑</small></div>
-    </div>
-    <p class="tap-hint">Lagan ustiga bosing</p>
-  </section>
+  <main class="screen">
+    <!-- MUQOVA -->
+    <section class="cover" id="cover" aria-label="Taklifnoma muqovasi">
+      <p class="kicker">Bismillahir rohmanir rohiym</p>
+      <h1>Oshga<br>taklifnoma</h1>
+      <p class="cover-sub">Qadrli mehmonimiz, marhamat!</p>
 
-  <section class="invitation" id="invitation">
-    <div class="orn">❧ ✦ ❧</div>
-    <p class="eyebrow">Bismillahir rohmanir rohiym</p>
-    <h2>To‘y oshi</h2>
-    <p class="intro">Aziz qadrdonlar va hurmatli mehmonlar! Sizni oilamizning quvonchli kunida qizimizning nikoh to‘yi munosabati bilan beriladigan to‘y oshimizga taklif qilamiz.</p>
-    <div class="family" id="familyName">Hurmat bilan, Qayumovlar oilasi</div>
-    <div class="orn">❧ ✦ ❧</div>
-    <div class="details">
-      <div class="detail"><p class="label">To‘y oshi kuni</p><p class="value" id="eventDate">Sana</p></div>
-      <div class="detail"><p class="label">Boshlanish vaqti</p><p class="value" id="eventTime">12:00</p></div>
-      <div class="detail"><p class="label">Manzil</p><p class="value" id="eventAddress">Manzil</p></div>
-    </div>
-    <p class="eyebrow">To‘y oshigacha qoldi</p>
-    <div class="countdown">
-      <div><strong id="days">00</strong><span>Kun</span></div>
-      <div><strong id="hours">00</strong><span>Soat</span></div>
-      <div><strong id="minutes">00</strong><span>Daqiqa</span></div>
-      <div><strong id="seconds">00</strong><span>Soniya</span></div>
-    </div>
-    <div class="actions">
-      <a class="btn" id="mapButton" href="https://maps.google.com" target="_blank" rel="noopener">📍 Manzilni xaritada ochish</a>
-      <button class="btn gold" id="shareButton">✉ Telegram orqali ulashish</button>
-      <button class="btn" id="musicButton">♫ Musiqani yoqish</button>
-    </div>
-    <audio id="music" loop><source src="music.mp3" type="audio/mpeg"></audio>
-    <p class="footer">Dasturxonimizda ko‘rishguncha!<br>Quvonchimizga sherik bo‘ling.</p>
-    <div class="orn">✦ ❀ ✦</div>
-  </section>
-</main>
-<script>
-// O'zingizning to'y ma'lumotlaringizni shu yerda almashtiring:
-const eventDate = "2026-12-20"; // YYYY-MM-DD
-const eventTime = "12:00";      // 24 soatlik format
-const eventAddress = "Toshkent shahri, manzilni shu yerga yozing";
-const familyName = "Hurmat bilan, Qayumovlar oilasi";
-const mapAddress = "Toshkent shahri, manzilni shu yerga yozing";
+      <div
+        class="plate-wrap"
+        id="openInvite"
+        role="button"
+        tabindex="0"
+        aria-label="Taklifnomani ochish"
+      >
+        <div class="plate">
+          <div class="rice">
+            <div class="carrot"></div>
+          </div>
+        </div>
+        <div class="sticker">
+          TAKLIFNOMANI OCHISH
+          <small>↑ LAGANNI BOSING ↑</small>
+        </div>
+      </div>
 
-const date = new Date(eventDate + "T00:00:00");
-const formattedDate = date.toLocaleDateString("uz-UZ", {
-  day:"numeric", month:"long", year:"numeric", weekday:"long"
-});
-document.getElementById("eventDate").textContent = formattedDate;
-document.getElementById("eventTime").textContent = eventTime;
-document.getElementById("eventAddress").textContent = eventAddress;
-document.getElementById("familyName").textContent = familyName;
-document.getElementById("mapButton").href = "https://maps.google.com/?q=" + encodeURIComponent(mapAddress);
+      <p class="tap-hint">Lagan ustiga bosing</p>
+    </section>
 
-const cover = document.getElementById("cover");
-const invitation = document.getElementById("invitation");
-const music = document.getElementById("music");
-const musicButton = document.getElementById("musicButton");
+    <!-- TAKLIFNOMA ICHI -->
+    <section class="invitation" id="invitation">
+      <div class="orn">❧ ✦ ❧</div>
+      <p class="eyebrow">Bismillahir rohmanir rohiym</p>
+      <h2>To‘y oshi</h2>
 
-async function openInvitation(){
-  cover.style.transition = "opacity .5s ease, transform .7s ease";
-  cover.style.opacity = "0";
-  cover.style.transform = "scale(.94)";
-  // Musiqa foydalanuvchi bosgan paytda boshlanadi; music.mp3 qo'shilgan bo'lishi kerak.
-  try { await music.play(); musicButton.textContent = "♫ Musiqani o‘chirish"; } catch(e) {}
-  setTimeout(()=>{
-    cover.style.display = "none";
-    invitation.classList.add("show");
-    window.scrollTo({top:0,behavior:"smooth"});
-  },500);
-}
-document.getElementById("openInvite").addEventListener("click",openInvitation);
-document.getElementById("openInvite").addEventListener("keydown",e=>{
-  if(e.key==="Enter"||e.key===" "){e.preventDefault();openInvitation();}
-});
+      <p class="intro" id="inviteText">
+        Aziz qadrdonlar, do‘stlar va hurmatli mehmonlar!
+        Sizlarni mehribon qizimizning nikoh to‘yi munosabati bilan
+        beriladigan to‘y oshimizga taklif qilamiz.
+        Quvonchli kunimizda dasturxonimizdan bahramand bo‘lib,
+        yoshlarning baxtiga duo qilib ketishingizni so‘raymiz.
+      </p>
 
-const target = new Date(eventDate + "T" + eventTime + ":00").getTime();
-function updateCountdown(){
-  const distance = target - Date.now();
-  if(distance<=0){
-    ["days","hours","minutes","seconds"].forEach(id=>document.getElementById(id).textContent="00");
-    return;
-  }
-  document.getElementById("days").textContent=Math.floor(distance/86400000);
-  document.getElementById("hours").textContent=Math.floor((distance%86400000)/3600000);
-  document.getElementById("minutes").textContent=Math.floor((distance%3600000)/60000);
-  document.getElementById("seconds").textContent=Math.floor((distance%60000)/1000);
-}
-updateCountdown(); setInterval(updateCountdown,1000);
+      <div class="family" id="familyName">
+        Hurmat bilan, qizimizning otasi va oilasi
+      </div>
 
-document.getElementById("shareButton").addEventListener("click",()=>{
-  const url=window.location.href;
-  const message="Sizni to‘y oshimizga taklif qilamiz!\nSana: "+formattedDate+
-    "\nVaqt: "+eventTime+"\nManzil: "+eventAddress+"\n\n"+url;
-  window.open("https://t.me/share/url?url="+encodeURIComponent(url)+"&text="+encodeURIComponent(message),"_blank");
-});
-musicButton.addEventListener("click",async()=>{
-  if(music.paused){
-    try{await music.play();musicButton.textContent="♫ Musiqani o‘chirish";}
-    catch(e){alert("Musiqa uchun music.mp3 faylini index.html yoniga yuklang.");}
-  }else{music.pause();musicButton.textContent="♫ Musiqani yoqish";}
-});
-</script>
+      <div class="orn">❧ ✦ ❧</div>
+
+      <div class="details">
+        <div class="detail">
+          <p class="label">To‘y oshi kuni</p>
+          <p class="value" id="eventDate">Sana</p>
+        </div>
+
+        <div class="detail">
+          <p class="label">Boshlanish vaqti</p>
+          <p class="value" id="eventTime">12:00</p>
+        </div>
+
+        <div class="detail">
+          <p class="label">Manzil</p>
+          <p class="value" id="eventAddress">Manzil</p>
+        </div>
+      </div>
+
+      <p class="eyebrow">To‘y oshigacha qoldi</p>
+
+      <div class="countdown">
+        <div><strong id="days">00</strong><span>Kun</span></div>
+        <div><strong id="hours">00</strong><span>Soat</span></div>
+        <div><strong id="minutes">00</strong><span>Daqiqa</span></div>
+        <div><strong id="seconds">00</strong><span>Soniya</span></div>
+      </div>
+
+      <div class="actions">
+        <a
+          class="btn"
+          id="mapButton"
+          href="https://maps.google.com"
+          target="_blank"
+          rel="noopener"
+        >📍 Manzilni xaritada ochish</a>
+
+        <button class="btn gold" id="shareButton">
+          ✉ Telegram orqali ulashish
+        </button>
+
+        <button class="btn" id="musicButton">
+          ♫ Musiqani yoqish
+        </button>
+      </div>
+
+      <audio id="music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+      </audio>
+
+      <p class="footer">
+        Dasturxonimizda ko‘rishguncha!<br>
+        Quvonchimizga sherik bo‘ling.
+      </p>
+
+      <div class="orn">✦ ❀ ✦</div>
+    </section>
+  </main>
+
+  <script>
+    // O'ZINGIZNING MA'LUMOTLARINGIZNI SHU YERDA ALMASHTIRING
+    const eventDate = "2026-12-20"; // YYYY-MM-DD
+    const eventTime = "12:00";      // 24 soatlik format
+    const eventAddress = "Toshkent shahri, manzilni shu yerga yozing";
+    const familyName = "Hurmat bilan, qizimizning otasi va oilasi";
+    const mapAddress = "Toshkent shahri, manzilni shu yerga yozing";
+
+    const date = new Date(eventDate + "T00:00:00");
+    const formattedDate = date.toLocaleDateString("uz-UZ", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      weekday: "long"
+    });
+
+    document.getElementById("eventDate").textContent = formattedDate;
+    document.getElementById("eventTime").textContent = eventTime;
+    document.getElementById("eventAddress").textContent = eventAddress;
+    document.getElementById("familyName").textContent = familyName;
+
+    document.getElementById("mapButton").href =
+      "https://maps.google.com/?q=" + encodeURIComponent(mapAddress);
+
+    const cover = document.getElementById("cover");
+    const invitation = document.getElementById("invitation");
+    const openInvite = document.getElementById("openInvite");
+    const music = document.getElementById("music");
+    const musicButton = document.getElementById("musicButton");
+
+    let isOpening = false;
+
+    async function openInvitation() {
+      if (isOpening) return;
+      isOpening = true;
+
+      cover.style.opacity = "0";
+      cover.style.transform = "scale(.94)";
+
+      // Musiqa bo'lmasa ham taklifnoma ochilaveradi.
+      try {
+        await music.play();
+        musicButton.textContent = "♫ Musiqani o‘chirish";
+      } catch (error) {
+        // music.mp3 qo'shilmagan bo'lsa, xatoni e'tiborsiz qoldiramiz.
+      }
+
+      setTimeout(() => {
+        cover.style.display = "none";
+        invitation.classList.add("show");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 500);
+    }
+
+    openInvite.addEventListener("click", openInvitation);
+
+    openInvite.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openInvitation();
+      }
+    });
+
+    const target = new Date(eventDate + "T" + eventTime + ":00").getTime();
+
+    function updateCountdown() {
+      const distance = target - Date.now();
+
+      if (distance <= 0) {
+        ["days", "hours", "minutes", "seconds"].forEach((id) => {
+          document.getElementById(id).textContent = "00";
+        });
+        return;
+      }
+
+      document.getElementById("days").textContent =
+        Math.floor(distance / 86400000);
+
+      document.getElementById("hours").textContent =
+        Math.floor((distance % 86400000) / 3600000);
+
+      document.getElementById("minutes").textContent =
+        Math.floor((distance % 3600000) / 60000);
+
+      document.getElementById("seconds").textContent =
+        Math.floor((distance % 60000) / 1000);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    document.getElementById("shareButton").addEventListener("click", () => {
+      const url = window.location.href;
+      const message =
+        "Sizni to‘y oshimizga taklif qilamiz!\n" +
+        "Sana: " + formattedDate + "\n" +
+        "Vaqt: " + eventTime + "\n" +
+        "Manzil: " + eventAddress + "\n\n" + url;
+
+      window.open(
+        "https://t.me/share/url?url=" +
+        encodeURIComponent(url) +
+        "&text=" +
+        encodeURIComponent(message),
+        "_blank"
+      );
+    });
+
+    musicButton.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicButton.textContent = "♫ Musiqani o‘chirish";
+        } catch (error) {
+          alert("Musiqa uchun music.mp3 faylini index.html yoniga joylang.");
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "♫ Musiqani yoqish";
+      }
+    });
+  </script>
 </body>
 </html>
