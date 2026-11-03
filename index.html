@@ -8,10 +8,10 @@
 
   <style>
     :root {
-      --green: #173b2e;
-      --deep: #0d281f;
-      --gold: #d8b76b;
-      --cream: #fff8e8;
+      --green: #244b38;
+      --deep: #ffffff;
+      --gold: #c7a052;
+      --cream: #ffffff;
       --red: #8d2d25;
     }
 
@@ -21,7 +21,7 @@
       margin: 0;
       min-height: 100vh;
       background: var(--deep);
-      color: var(--cream);
+      color: var(--green);
       font-family: Georgia, "Times New Roman", serif;
       overflow-x: hidden;
     }
@@ -31,7 +31,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .18;
+      opacity: .12;
       background-image: radial-gradient(
         circle at 12px 12px,
         transparent 8px,
@@ -62,12 +62,7 @@
       border: 1px solid var(--gold);
       outline: 1px solid #d8b76b55;
       outline-offset: -9px;
-      background: radial-gradient(
-        ellipse at center,
-        #28523e 0%,
-        #173b2e 62%,
-        #102c22 100%
-      );
+      background: radial-gradient(ellipse at center, #ffffff 0%, #fffdf7 72%, #f8f4e9 100%);
       box-shadow: 0 18px 60px #0006;
       transition: opacity .5s ease, transform .7s ease;
     }
@@ -78,7 +73,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      color: var(--gold);
+      color: #b18a43;
       font-size: 25px;
       letter-spacing: 9px;
     }
@@ -87,7 +82,7 @@
     .cover::after { bottom: 25px; }
 
     .kicker {
-      color: #e4cb8c;
+      color: #98713a;
       font-size: 12px;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -98,12 +93,12 @@
       font-size: clamp(38px, 9vw, 62px);
       font-weight: normal;
       line-height: 1.1;
-      text-shadow: 0 3px 16px #0005;
+      text-shadow: none;
     }
 
     .cover-sub {
       margin: 0 0 12px;
-      color: #f2e6c8;
+      color: #526b5b;
       font-size: 16px;
       letter-spacing: 1px;
     }
@@ -215,7 +210,7 @@
 
     .tap-hint {
       margin: 8px 0 0;
-      color: #f2dfad;
+      color: #526b5b;
       font-size: 14px;
       letter-spacing: 1px;
     }
@@ -414,14 +409,14 @@
 
       <p class="intro" id="inviteText">
         Aziz qadrdonlar, do‘stlar va hurmatli mehmonlar!
-        Sizlarni mehribon qizimizning nikoh to‘yi munosabati bilan
-        beriladigan to‘y oshimizga taklif qilamiz.
+        Sizlarni mehribon qizimiz Dilnozaning Sardor bilan bo‘ladigan
+        nikoh to‘yi munosabati bilan beriladigan to‘y oshimizga taklif qilamiz.
         Quvonchli kunimizda dasturxonimizdan bahramand bo‘lib,
         yoshlarning baxtiga duo qilib ketishingizni so‘raymiz.
       </p>
 
       <div class="family" id="familyName">
-        Hurmat bilan, qizimizning otasi va oilasi
+        Hurmat bilan, Dilnozaning otasi Anvar aka va oilasi
       </div>
 
       <div class="orn">❧ ✦ ❧</div>
@@ -488,7 +483,7 @@
     const eventDate = "2026-12-20"; // YYYY-MM-DD
     const eventTime = "12:00";      // 24 soatlik format
     const eventAddress = "Toshkent shahri, manzilni shu yerga yozing";
-    const familyName = "Hurmat bilan, qizimizning otasi va oilasi";
+    const familyName = "Hurmat bilan, Dilnozaning otasi Anvar aka va oilasi";
     const mapAddress = "Toshkent shahri, manzilni shu yerga yozing";
 
     const date = new Date(eventDate + "T00:00:00");
@@ -515,26 +510,24 @@
 
     let isOpening = false;
 
-    async function openInvitation() {
+    function openInvitation() {
       if (isOpening) return;
       isOpening = true;
 
+      // Taklifnoma darhol ochiladi; musiqa ochilishga xalaqit bermaydi.
       cover.style.opacity = "0";
       cover.style.transform = "scale(.94)";
-
-      // Musiqa bo'lmasa ham taklifnoma ochilaveradi.
-      try {
-        await music.play();
-        musicButton.textContent = "♫ Musiqani o‘chirish";
-      } catch (error) {
-        // music.mp3 qo'shilmagan bo'lsa, xatoni e'tiborsiz qoldiramiz.
-      }
 
       setTimeout(() => {
         cover.style.display = "none";
         invitation.classList.add("show");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 500);
+
+      // Musiqa ixtiyoriy: fayl bo'lmasa ham taklifnoma ochiq qoladi.
+      music.play().then(() => {
+        musicButton.textContent = "♫ Musiqani o‘chirish";
+      }).catch(() => {});
     }
 
     openInvite.addEventListener("click", openInvitation);
